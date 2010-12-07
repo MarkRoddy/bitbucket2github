@@ -1,0 +1,51 @@
+.. -*- restructuredtext -*-
+
+BitBucket2GitHub
+=============================
+
+What is it?
+-----------------------------------------
+BitBucket and GitHub are two popular services for developers to host and share their code online. Nowadays it is a common practice to mirror a project's source code in both services so that users can easily watch and fork the project from their favorite service.
+
+But manually syncing BitBucket and GitHub is tedious and error prone. I developed this little package to automate the syncing both ways.
+
+How to use it?
+-----------------------------------------
+* Call "bitbucket2github" to mirror all public repos in BitBucket account to GitHub. It will prompt you for BitBucket username, GitHub username and GitHub API key.
+* Call "github2bitbucket" to mirror all public repos in GitHub account to BitBucket. It will prompt you for GitHub username, BitBucket username and BitBucket password.
+
+
+Latest Version
+-----------------------------------------
+The latest version of this project can be found at : http://bitbucket.org/sramana/bitbucket2github
+
+
+Installation
+-----------------------------------------
+Option 1  ::
+
+    sudo pip install bitbucket2github
+
+Option 2 : If you downloaded the source code  ::
+
+    tar xzvf bitbucket2github-1.0.tar.gz
+    cd bitbucket2github-1.0
+    sudo python setup.py install
+
+
+License
+-----------------------------------------
+This project is licensed under New BSD license.
+
+
+Contribution and Feedback
+-----------------------------------------
+Contributions and Feedback are most welcome. Please email the author with your comments.
+
+
+Author Information
+-----------------------------------------
+Ramana <sramana9@gmail.com>
+
+* http://bitbucket.org/sramana
+* http://github.com/sramana
