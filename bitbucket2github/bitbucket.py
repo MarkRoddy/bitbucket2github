@@ -31,6 +31,7 @@ def create_repo(reponame, username, password):
     """ Creates a public repository with the given credentials """
 
     if not repo_exists(reponame, username):
+        print "Creating " + reponame + " in BitBucket"
         # Somehow BitBucket authentication with urllib2 is not working. So using this ugly approach.
         cmd = 'curl -d "name={reponame}" -u {username}:{password} {base_url}/repositories/'
         cmd = cmd.format(reponame=reponame,

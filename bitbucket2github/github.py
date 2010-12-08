@@ -27,4 +27,5 @@ def create_repo(reponame, username, api_token):
     github = Github(username=username, api_token=api_token)
 
     if not repo_exists(reponame, username):
+        print "Creating " + reponame + " in GitHub"
         github.repos.create(reponame)

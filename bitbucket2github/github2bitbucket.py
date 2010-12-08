@@ -15,12 +15,13 @@ bitbucket_username = vault.get('bitbucket.org', 'username')
 bitbucket_password = vault.get('bitbucket.org', bitbucket_username)
 
 bitbucket_url = 'ssh://hg@bitbucket.org/{0}/{1}'
-github_url = 'git+ssh://git@github.com/{0}/{1}'
+github_url = 'git+ssh://git@github.com/{0}/{1}.git'
 tmp_dir = tempfile.gettempdir()
 
 
 def backup(repo):
-    bitbucket.create_repo(repo, github_username, github_api_token)
+    print "Syncing " + repo + " from GitHub to BitBucket"
+    bitbucket.create_repo(repo, bitbucket_username, bitbucket_password)
 
     bitbucket_repo = bitbucket_url.format(bitbucket_username, repo)
     github_repo = github_url.format(github_username, repo)
@@ -31,12 +32,12 @@ def backup(repo):
     else:
         sh('hg clone {0} {1}'.format(github_repo, local_repo))
 
-    sh('hg bookmark master -f -R {1}'.format(local_repo))
+    sh('hg bookmark master -f -R {0}'.format(local_repo))
     sh('hg push {0} -R {1}'.format(bitbucket_repo, local_repo))
 
 
 def main():
-    for repo in github.repos():
+    for repo in github.repos(github_username):
         backup(repo)
 
 
