@@ -13,7 +13,14 @@ def repos(username):
     f = urllib2.urlopen(url)
     response = json.loads(f.read())
 
-    return [repo.get('slug') for repo in response.get('repositories')]
+    return [
+        {
+            "name":repo.get('slug'),
+            "description":repo.get('description', ''),
+            "homepage":repo.get('website', ''),
+        } for repo in response.get('repositories')
+    ]
+
 
 
 def repo_exists(reponame, username):
@@ -27,16 +34,20 @@ def repo_exists(reponame, username):
         return True
 
 
-def create_repo(reponame, username, password):
+def create_repo(repo, username, password):
     """ Creates a public repository with the given credentials """
+
+    reponame = repo['name']
 
     if not repo_exists(reponame, username):
         print "Creating " + reponame + " in BitBucket"
         # Somehow BitBucket authentication with urllib2 is not working. So using this ugly approach.
-        cmd = 'curl -d "name={reponame}" -u {username}:{password} {base_url}/repositories/'
+        cmd = 'curl -d "name={reponame}" -d "description={description}" -d "website={url}" -u {username}:{password} {base_url}/repositories/'
         cmd = cmd.format(reponame=reponame,
                          username=username,
                          password=password,
-                         base_url=base_url)
+                         base_url=base_url,
+                         description=repo['description'],
+                         url=repo['homepage'])
 
         sh(cmd)

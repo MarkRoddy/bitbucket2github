@@ -20,12 +20,12 @@ tmp_dir = tempfile.gettempdir()
 
 
 def backup(repo):
-    print "Syncing " + repo + " from BitBucket to GitHub"
+    print "Syncing %s from BitBucket to GitHub" % repo['name']
     github.create_repo(repo, github_username, github_api_token)
 
-    bitbucket_repo = bitbucket_url.format(bitbucket_username, repo)
-    github_repo = github_url.format(github_username, repo)
-    local_repo = os.path.join(tmp_dir, repo)
+    bitbucket_repo = bitbucket_url.format(bitbucket_username, repo['name'])
+    github_repo = github_url.format(github_username, repo['name'])
+    local_repo = os.path.join(tmp_dir, repo['name'])
 
     if os.path.exists(local_repo):
         sh('hg pull {0} -R {1}'.format(bitbucket_repo, local_repo))
