@@ -1,0 +1,7 @@
+syntax:glob
+*~
+*.py[co] 
+bitbucket2github.egg*
+build*
+dist*
+
