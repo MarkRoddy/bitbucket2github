@@ -18,6 +18,7 @@ def repos(username):
             "name":repo.get('slug'),
             "description":repo.get('description', ''),
             "homepage":repo.get('website', ''),
+            "scm":repo.get("scm"),
         } for repo in response.get('repositories')
     ]
 
