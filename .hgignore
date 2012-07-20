@@ -4,4 +4,4 @@ syntax:glob
 bitbucket2github.egg*
 build*
 dist*
-
+venv
